@@ -1,4 +1,4 @@
-# Git, Docker Project
+# Git Service – Docker Project
 
 ![Alt text](Resources/git.png)
 
