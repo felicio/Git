@@ -12,10 +12,12 @@ RUN mkdir /var/run/sshd
 # Add 'git' user with restricted shell
 RUN adduser --shell /usr/bin/git-shell --disabled-password --gecos "" git
 
-# SSH login fix.
-# RUN ...
-
 COPY ["etc/sshd_config", "/etc/ssh/sshd_config"]
+
+# Enbale interactive shell
+WORKDIR /home/git
+COPY ["etc/git-shell-commands", "./"]
+RUN chown git:git git-shell-commands && chmod 550 git-shell-commands
 
 # Test validity of configuration file and output effective configuration.
 WORKDIR /var/log/sshd
@@ -28,4 +30,4 @@ VOLUME ["/srv/git/data"]
 EXPOSE 22
 
 # sshd re-exec requires execution with an absolute path
-CMD ["/usr/sbin/sshd", "-D", "-E", "/var/log/sshd"]
+CMD ["/usr/sbin/sshd", "-D"]
