@@ -5,14 +5,27 @@ RUN apt-get update && apt-get install -y \
     git \
     openssh-server
 
+# Restrict ssh daemon's access outside directory tree (chroot jail, sandbox)
+# by creating privilige separation directory.
+RUN mkdir /var/run/sshd
+
 # Add 'git' user with restricted shell
-RUN adduser --shell /usr/bin/git-shell --quiet git
+RUN adduser --shell /usr/bin/git-shell --disabled-password --gecos "" git
 
-# Expose files/folders created by the container
+# SSH login fix.
+# RUN ...
 
+COPY ["etc/sshd_config", "/etc/ssh/sshd_config"]
 
-VOLUME ["/kyes"]
+# Test validity of configuration file and output effective configuration.
+WORKDIR /var/log/sshd
+RUN touch sshd.log && sshd -T > sshd_test.log
+
+# Mount file containing all permitted users' public keys
+VOLUME ["/home/git/.ssh/authorized_keys"]
+VOLUME ["/srv/git/data"]
 
 EXPOSE 22
 
-CMD ["/usr/sbin/sshd"]
+# sshd re-exec requires execution with an absolute path
+CMD ["/usr/sbin/sshd", "-D", "-E", "/var/log/sshd"]
