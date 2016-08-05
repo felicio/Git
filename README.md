@@ -1,4 +1,5 @@
-# Git Service – Docker Project
+# Git Service Under Various Protocols
+This project serves as a demonstration of a containerization using Docker technology.
 
 ![Alt text](Resources/git.png)
 
