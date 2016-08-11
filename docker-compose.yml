@@ -1,0 +1,11 @@
+version: '1'
+services:
+  git:
+    buil:
+    ports:
+    volumes:
+    links:
+  ssh:
+    image:
+volumes:
+  logvolume01:
