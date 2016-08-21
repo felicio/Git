@@ -11,6 +11,9 @@ RUN apt-get update && apt-get install -y \
 # read-only access to data folder, that will run git daemon.
 RUN adduser --disabled-password --no-create-home --gecos "" --shell /usr/bin/git-shell git-ro
 
+# Add 'git' user with restricted shell
+RUN adduser --shell /usr/bin/git-shell --disabled-password --gecos "" git
+
 # Create folder for storing repositories
 WORKDIR /srv/git/data
 RUN chmod 750 . && chmod g+s . && chgrp git-ro .
