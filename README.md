@@ -23,7 +23,7 @@ docker run -dP -v /PATH:/srv/git/public IMAGE
 
 To let others contribute to your work add their public keys to a single file you'll later mount to the container.
 ```bash
-docker run -dP -v /PATH:/home/git/.ssh/authorized_keys -v /PATH:/srv/git/private felicio/ssh
+docker run -d -p NUMBER:22 -v /PATH:/home/git/.ssh/authorized_keys -v /PATH:/srv/git/private felicio/ssh
 ```
 
 ## Clone
