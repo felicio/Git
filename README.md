@@ -25,3 +25,15 @@ To let others contribute to your work add their public keys to a single file you
 ```bash
 docker run -dP -v /PATH:/home/git/.ssh/authorized_keys -v /PATH:/srv/git/private felicio/ssh
 ```
+
+## Clone
+### Git Protocol
+```bash
+git clone git@HOST:PORT/PATH
+```
+
+
+### SSH Protocol
+```bash
+git clone ssh://git@HOST:PORT/PATH
+```
