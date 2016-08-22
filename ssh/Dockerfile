@@ -1,32 +1,23 @@
-FROM debian:jessie
+FROM felicio/git:git
 LABEL description="Git Server – SSH Protocol"
 
-RUN apt-get update && apt-get install -y \
-    git \
+# Change user back to root since git images exits wit non-privileged user.
+USER root
+
+RUN apt-get update && apt-get install --no-install-recommends -q=2 \
     openssh-server
 
-# Restrict ssh daemon's access outside directory tree (chroot jail, sandbox)
-# by creating privilige separation directory.
+# Restrict ssh daemon's access outside a directory tree by creating privilige separation directory (chroot jail).
 RUN mkdir /var/run/sshd
-
-# Add 'git' user with restricted shell
-RUN adduser --shell /usr/bin/git-shell --disabled-password --gecos "" git
 
 # Configure SSH server.
 COPY ["etc/sshd_config", "/etc/ssh/sshd_config"]
 
-# Enbale interactive login shell.
-WORKDIR /home/git
-COPY ["etc/git-shell-commands", "./"]
-RUN chown git:git git-shell-commands && chmod 550 git-shell-commands
-
 # Test validity of configuration file and output effective configuration.
-WORKDIR /var/log/sshd
-RUN sshd -T > sshd_test.log
+RUN sshd -T > /var/log/sshd_test.log
 
 # Mount file containing all permitted users' public keys.
 VOLUME ["/home/git/.ssh/authorized_keys"]
-VOLUME ["/srv/git/data"]
 
 EXPOSE 22
 
