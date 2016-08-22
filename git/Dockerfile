@@ -1,30 +1,31 @@
 FROM debian:jessie
 LABEL description="Git Server – Git Protocol"
 
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install --no-install-recommends -q=2 \
     git
 
-# Grant owner and group only, not others, access to data directory.
-#RUN echo "umask 027" >> /etc/bash.bashrc
+# Create an user with read-only permissions to public directory, which will also run the daemon.
+# And another one that will optionally serve as login account for SSH connections.
+RUN adduser --system --group --no-create-home --quiet git-ro
+RUN adduser --disabled-password --shell /usr/bin/git-shell --quiet git
 
-# Create user, with disabled password authentication and
-# read-only access to data folder, that will run git daemon.
-RUN adduser --disabled-password --no-create-home --gecos "" --shell /usr/bin/git-shell git-ro
+# Enable interactive git shell with preconfigured set of commands.
+ADD ["git-shell-commands", "/home/git/"]
 
-# Add 'git' user with restricted shell
-RUN adduser --shell /usr/bin/git-shell --disabled-password --gecos "" git
+# Create folders for storing repositories
+WORKDIR /srv/git
 
-# Create folder for storing repositories
-WORKDIR /srv/git/data
-RUN chmod 750 . && chmod g+s . && chgrp git-ro .
+# Define access permissions and SETGID.
+RUN mkdir -m 2750 public private
+RUN chown git:git-ro public && chown git:git private
 
-# Expose a mountpoint to hold external content from native host, data stores or other containers.
-VOLUME ["/srv/git/data"]
+# Expose a mountpoints to hold external content from native host, data stores or other containers.
+VOLUME ["/srv/git/public", "/srv/git/private"]
 
-# The same should count for a mapped port if a firewall is set up.
+# Keep in mind a firewall's restrictions.
 EXPOSE 9418
 
 USER git-ro
 
 # Allow server to restart without waiting for old connnections to time out.
-CMD ["git", "daemon", "--reuseaddr", "--base-path=/srv/git/data", "/srv/git/data"]
+CMD ["git", "daemon", "--reuseaddr", "--base-path=/srv/git/public", "/srv/git/public", "--base-path-relaxed"]
