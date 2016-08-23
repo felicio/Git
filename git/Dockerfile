@@ -29,4 +29,3 @@ USER git-ro
 
 # Allow server to restart without waiting for old connnections to time out.
 CMD ["git", "daemon", "--reuseaddr", "--base-path=/srv/git/public", "/srv/git/public", "--base-path-relaxed"]
-√
