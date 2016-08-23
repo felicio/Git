@@ -27,7 +27,7 @@ docker run -dP -v PATH/Resources/srv:/srv/git/public --name CONTAINER IMAGE
 To let others contribute to your work add their public keys to a single file you'll later mount to the container.
 ```bash
 docker build -t IMAGE -f PATH/ssh
-docker run -d -p PORT:22 -v PATH/Resources/authorized_keys:/home/git/.ssh/authorized_keys -v PATH/Resources/srv:/srv/git/private --name CONTAINER IMAGE
+docker run -dP -v PATH/Resources/authorized_keys:/home/git/.ssh/authorized_keys -v PATH/Resources/srv:/srv/git/private --name CONTAINER IMAGE
 ```
 
 ### Docker Compose
@@ -44,7 +44,7 @@ git clone git://HOST:PORT/PATH
 git clone ssh://git@HOST:PORT/PATH
 ```
 
-## Clean up
+## Clean Up
 ```bash
 # Docker Engine
 docker stop CONTAINER
@@ -52,6 +52,5 @@ docker rm -v CONTAINER
 docker rmi IMAGE
 
 # Docker Compose
-docker-compose stop
-docker-compose rm -v
+docker-compose down -v --rmi all
 ```
