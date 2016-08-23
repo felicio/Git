@@ -2,14 +2,16 @@ version: '2'
 services:
   git:
     build: git/
-    image: felicio/git:git
+    image: ${REPOSITORY}/git:git
     volumes:
     - ./Resources/srv:/srv/git/public
     ports:
     - "9418"
+    environment:
+    - TERM=xterm
   ssh:
     build: ssh/
-    image: felicio/git:ssh
+    image: ${REPOSITORY}/git:ssh
     volumes:
     - ./Resources/srv:/srv/git/private
     - ./Resources/authorized_keys:/home/git/.ssh/authorized_keys
