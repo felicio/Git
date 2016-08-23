@@ -17,7 +17,7 @@ COPY ["etc/sshd_config", "/etc/ssh/sshd_config"]
 RUN sshd -T > /var/log/sshd_test.log
 
 # Mount file containing all permitted users' public keys.
-VOLUME ["/home/git/.ssh/authorized_keys"]
+VOLUME ["/srv/git/private", "/home/git/.ssh/authorized_keys"]
 
 EXPOSE 22
 
