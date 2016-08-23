@@ -12,25 +12,35 @@ When built and run user is left with a container (an application) that serves us
 
 ![Alt text](Resources/git.png)
 
-## Run
+## Build, Run
 ### Docker Engine
 #### Git Protocol
 
 To simply share your work with others on trusted network run the following command.
 ```bash
-docker run -dP -v /PATH:/srv/git/public IMAGE
+docker build -t IMAGE PATH/git
+docker run -dP -v PATH:/srv/git/public --name CONTAINER IMAGE
 ```
+
 #### SSH Protocol
 
 To let others contribute to your work add their public keys to a single file you'll later mount to the container.
 ```bash
+docker build -t IMAGE -f PATH/ssh
 docker run -d -p P:22 -v /PATH:/home/git/.ssh/authorized_keys -v /PATH:/srv/git/private felicio/ssh
 ```
 #### Clean up
 ```bash
-docker stop
-docker rm -v IMAGE
+docker stop CONTAINER
+docker rm -v CONTAINER
+docker rmi IMAGE
 ```
+
+### Docker Compose
+#### Git Protocol
+#### SSH Protocol
+#### Clean up
+
 
 ## Clone
 _from a running container_
