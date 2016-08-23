@@ -19,6 +19,11 @@ To simply share your work with others on trusted network run the following comma
 docker run -dP -v /PATH:/srv/git/public IMAGE
 ```
 
+##### Clean up
+```bash
+docker-compose rm -v
+```
+
 ### SSH Protocol
 
 To let others contribute to your work add their public keys to a single file you'll later mount to the container.
@@ -29,7 +34,7 @@ docker run -d -p NUMBER:22 -v /PATH:/home/git/.ssh/authorized_keys -v /PATH:/srv
 ## Clone
 ### Git Protocol
 ```bash
-git clone git@HOST:PORT/PATH
+git clone git://HOST:PORT/PATH
 ```
 
 
