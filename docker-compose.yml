@@ -6,7 +6,7 @@ services:
     volumes:
     - ./Resources/srv:/srv/git/public
     ports:
-    - "9418:9418"
+    - "9418"
   ssh:
     build: ssh/
     image: felicio/git:ssh
@@ -14,4 +14,4 @@ services:
     - ./Resources/srv:/srv/git/private
     - ./Resources/authorized_keys:/home/git/.ssh/authorized_keys
     ports:
-    - "2222:22"
+    - "22"
