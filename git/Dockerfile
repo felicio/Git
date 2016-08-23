@@ -19,8 +19,8 @@ WORKDIR /srv/git
 RUN mkdir -m 2750 public private
 RUN chown git:git-ro public && chown git:git private
 
-# Expose a mountpoints to hold external content from native host, data stores or other containers.
-VOLUME ["/srv/git/public", "/srv/git/private"]
+# Expose a mountpoint to hold external content from native host, data stores or other containers.
+VOLUME ["/srv/git/public"]
 
 # Keep in mind a firewall's restrictions.
 EXPOSE 9418
@@ -29,3 +29,4 @@ USER git-ro
 
 # Allow server to restart without waiting for old connnections to time out.
 CMD ["git", "daemon", "--reuseaddr", "--base-path=/srv/git/public", "/srv/git/public", "--base-path-relaxed"]
+√
