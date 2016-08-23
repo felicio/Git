@@ -26,7 +26,7 @@ To let others contribute to your work add their public keys to a single file you
 ```bash
 docker run -d -p P:22 -v /PATH:/home/git/.ssh/authorized_keys -v /PATH:/srv/git/private felicio/ssh
 ```
-##### Clean up
+#### Clean up
 ```bash
 docker stop
 docker rm -v IMAGE
