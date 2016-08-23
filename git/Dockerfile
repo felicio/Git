@@ -10,7 +10,7 @@ RUN adduser --system --group --no-create-home --quiet git-ro
 RUN adduser --disabled-password --shell /usr/bin/git-shell --quiet git
 
 # Enable interactive git shell with preconfigured set of commands.
-COPY ["etc/git-shell-commands", "/home/git/git-shell-commands"]
+COPY ["etc/git-shell-commands/", "/home/git/git-shell-commands/"]
 
 # Create folders for storing repositories
 WORKDIR /srv/git
