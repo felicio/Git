@@ -19,7 +19,7 @@ When built and run user is left with a container (an application) that serves us
 To simply share your work with others on trusted network run the following command.
 ```bash
 docker build -t IMAGE PATH/git
-docker run -dP -v PATH:/srv/git/public --name CONTAINER IMAGE
+docker run -dP -v PATH/Resources/srv:/srv/git/public --name CONTAINER IMAGE
 ```
 
 #### SSH Protocol
@@ -27,31 +27,31 @@ docker run -dP -v PATH:/srv/git/public --name CONTAINER IMAGE
 To let others contribute to your work add their public keys to a single file you'll later mount to the container.
 ```bash
 docker build -t IMAGE -f PATH/ssh
-docker run -d -p P:22 -v /PATH:/home/git/.ssh/authorized_keys -v /PATH:/srv/git/private felicio/ssh
-```
-#### Clean up
-```bash
-docker stop CONTAINER
-docker rm -v CONTAINER
-docker rmi IMAGE
+docker run -d -p PORT:22 -v PATH/Resources/authorized_keys:/home/git/.ssh/authorized_keys -v PATH/Resources/srv:/srv/git/private --name CONTAINER IMAGE
 ```
 
 ### Docker Compose
-#### Git Protocol
-#### SSH Protocol
-#### Clean up
 
+```bash
+docker-compose up -d
+```
 
 ## Clone
 _from a running container_
 
-#### Git Protocol
-
 ```bash
 git clone git://HOST:PORT/PATH
-```
-#### SSH Protocol
-
-```bash
 git clone ssh://git@HOST:PORT/PATH
+```
+
+## Clean up
+```bash
+# Docker Engine
+docker stop CONTAINER
+docker rm -v CONTAINER
+docker rmi IMAGE
+
+# Docker Compose
+docker-compose stop
+docker-compose rm -v
 ```
