@@ -3,13 +3,9 @@ sudo: required
 services:
   - docker
 
-branches:
-  only:
-    - master
-
 before_instal:
   - docker build -t repository/git:git git/
   - docker build ssh/
 
 script:
-  - docker images | egrep git
+  - docker images | grep git
