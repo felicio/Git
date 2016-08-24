@@ -1,5 +1,6 @@
 # Git Service Under Various Protocols
 _using Docker technology_
+
 [![Build Status](https://travis-ci.org/felicio/Git.svg?branch=master)](https://travis-ci.org/felicio/Git)
 
 This project demonstrates containerization practices on a subject of version control. Each of inspected Dockerfiles focuses on configuration of a runtime environment for bare repositories' distribution via specified data transfer protocol.
