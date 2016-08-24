@@ -4,8 +4,8 @@ services:
   - docker
 
 install:
-  - docker build -t repository/git:git git/
-  - docker build ssh/
+  - docker build -t felicio/git:git git/
+  - docker build -t felicio/git:ssh ssh/
 
 script:
   - docker images | egrep git
