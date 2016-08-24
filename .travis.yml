@@ -3,7 +3,7 @@ sudo: required
 services:
   - docker
 
-instal:
+install:
   - docker build -t repository/git:git git/
   - docker build ssh/
 
