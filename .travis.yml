@@ -1,0 +1,17 @@
+sudo: required
+
+language: ruby
+
+services:
+  - docker
+
+branches:
+  only:
+    - master
+
+before_instal:
+  - docker build git/
+  - docker build ssh/
+
+script:
+  - bundle exec rake test
