@@ -13,7 +13,7 @@ __Currently supported solutions are:__
 
 When built and run user is left with a container (an application) that serves user's provided Git repositories either to read-only public access or read-write access for contributors.
 
-![Project's diagram](https://github.com/felicio/Git/blob/master/Resources/git.png)
+![Project's diagram](Resources/git.png)
 
 ## Build, Run
 ### Docker Engine
