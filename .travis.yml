@@ -3,6 +3,10 @@ sudo: required
 services:
   - docker
 
+branches:
+  only:
+    - master
+
 install:
   - docker build -t felicio/git:git git/
   - docker build -t felicio/git:ssh ssh/
