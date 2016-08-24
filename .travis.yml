@@ -7,7 +7,7 @@ services:
 
 branches:
   only:
-    - mster
+    - master
 
 before_instal:
   - docker build git/
