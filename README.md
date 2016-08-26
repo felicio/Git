@@ -2,6 +2,8 @@
 _using Docker technology_
 [![Build Status](https://travis-ci.org/felicio/Git.svg?branch=master)](https://travis-ci.org/felicio/Git)
 
+[![Build Status](https://travis-ci.org/felicio/Git.svg?branch=master)](https://travis-ci.org/felicio/Git)
+
 This project demonstrates containerization practices on a subject of version control. Each of inspected Dockerfiles focuses on configuration of a runtime environment for bare repositories' distribution via specified data transfer protocol.
 
 __Currently supported solutions are:__
@@ -12,7 +14,7 @@ __Currently supported solutions are:__
 
 When built and run user is left with a container (an application) that serves user's provided Git repositories either to read-only public access or read-write access for contributors.
 
-![Alt text](Resources/git.png)
+![Project's diagram](Resources/git.png)
 
 ## Build, Run
 ### Docker Engine
