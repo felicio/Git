@@ -1,5 +1,6 @@
 # Git Service Under Various Protocols
 _using Docker technology_
+[![Build Status](https://travis-ci.org/felicio/Git.svg?branch=master)](https://travis-ci.org/felicio/Git)
 
 [![Build Status](https://travis-ci.org/felicio/Git.svg?branch=master)](https://travis-ci.org/felicio/Git)
 
